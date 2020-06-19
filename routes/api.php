@@ -18,5 +18,12 @@ Route::apiResource('users', 'UserController');
 
 Route::prefix('users')->group(function () {
     Route::get('/', 'UserController@index');
-    //Route::get('/{id}', 'PersonController@show');
+    Route::get('/{id}', 'UserController@show');
+});
+
+Route::apiResource('mascotas', 'MascotaController');
+
+Route::prefix('mascotas')->group(function () {
+    Route::get('/', 'MascotaController@index');
+    Route::get('/{id}', 'MascotaController@show');
 });

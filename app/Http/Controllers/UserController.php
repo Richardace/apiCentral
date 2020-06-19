@@ -14,20 +14,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return $users;
+        return User::all();
+        
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -36,7 +27,43 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User;
+        $user->documento = $request['documento'];
+        $user->nombre = $request['nombre'];
+        $user->apellido = $request['apellido'];
+        $user->sexo = $request['sexo'];
+        $user->telefono = $request['telefono'];
+        $user->pregunta_secreta = $request['pregunta_secreta'];
+        $user->respuesta_secreta = $request['respuesta_secreta'];
+        $user->correo = $request['correo'];
+        $user->tipo_usuario = $request['tipo_usuario'];
+        $user->estado = $request['estado'];
+        $user->password = $request['password'];
+
+        $user->save();
+        return $user;
+    }
+
+    public function login(Request $request)
+    {
+        $documento = $request['documento'];
+        $password = $request['password'];
+
+
+        $usuario = User::where('users.documento', '=', $documento)
+                            ->select('users.*')
+                            ->first();
+
+        if($usuario){
+            return response()->json([
+                            'documento' => $usuario->id,
+                            'codigo' => $usuario->codigo,
+                        ]);    
+        }else{
+            return response('Datos invalidos', 400)->header('Content-Type', 'text/plain');
+        }
+
+        
     }
 
     /**
@@ -45,20 +72,10 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
-    {
-        //
+        $user = User::find($id);
+        return isset($user) ? $user : [];
     }
 
     /**

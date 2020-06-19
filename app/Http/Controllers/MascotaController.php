@@ -14,17 +14,7 @@ class MascotaController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return Mascota::all();
     }
 
     /**
@@ -44,20 +34,10 @@ class MascotaController extends Controller
      * @param  \App\Mascota  $mascota
      * @return \Illuminate\Http\Response
      */
-    public function show(Mascota $mascota)
+    public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Mascota  $mascota
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Mascota $mascota)
-    {
-        //
+        $mascota = Mascota::find($id);
+        return isset($mascota) ? $mascota : [];
     }
 
     /**
