@@ -27,3 +27,10 @@ Route::prefix('mascotas')->group(function () {
     Route::get('/', 'MascotaController@index');
     Route::get('/{id}', 'MascotaController@show');
 });
+
+Route::apiResource('citas', 'CitaController');
+
+Route::prefix('citas')->group(function () {
+    Route::get('/', 'CitaController@index');
+    Route::get('/{id}', 'CitaController@show');
+});

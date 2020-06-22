@@ -14,7 +14,7 @@ class CitaController extends Controller
      */
     public function index()
     {
-        //
+        return Cita::all();
     }
 
     /**
@@ -33,9 +33,10 @@ class CitaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function show($id)
     {
-        //
+        $cita = Cita::find($id);
+        return isset($cita) ? $cita : [];
     }
 
     /**
@@ -44,10 +45,7 @@ class CitaController extends Controller
      * @param  \App\Cita  $cita
      * @return \Illuminate\Http\Response
      */
-    public function show(Cita $cita)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
